@@ -1,17 +1,14 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import {readFileSync} from 'node:fs';
 import test from 'node:test';
+import { curvatureColumn, curvatureInput } from '../inputs/factor-columns.mjs';
 
-const d = JSON.parse(readFileSync(new URL('../inputs/session.json', import.meta.url), 'utf8'));
-
-test("各方向指向真实成对采样", () => {
-  assert.ok(d.directions.every(x=>x.pairs.every(([id,u,v])=>d.eventsData.some(e=>e.id===id)&&Number.isFinite(u)&&Number.isFinite(v))));
-});
-
-test("有极端饱和与未完整采样", () => {
-  assert.ok(d.eventsData.some(e=>e.plus-e.minus>700)&&d.eventsData.some(e=>e.minus===null));
-});
-
-test("同一难例参与两个方向的不同契约", () => {
-  assert.ok(d.directions.every(dir=>dir.pairs.some(r=>r[0]==='b')));
+const data=JSON.parse(readFileSync(new URL('../inputs/factor-columns.json',import.meta.url),'utf8'));
+test('共享预测头的曲率因子的格式与关联', () => {
+  assert.equal(curvatureColumn('direct','g',0).length,data.rows);
+  assert.equal(curvatureColumn('transpose','g',0).length,data.cols);
+  assert.ok(data.rows*data.cols*8<data.workBytes);
+  assert.ok((data.rows*data.cols)**2*8>data.workBytes*1000);
+  assert.ok(data.protected[0][3]<data.protected.at(-1)[2]);
+  assert.equal(data.exposure.reduce((a,b)=>a+b),1);
 });

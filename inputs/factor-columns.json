@@ -1,0 +1,117 @@
+{
+  "rows": 256,
+  "cols": 192,
+  "rank": 36,
+  "workBytes": 3932160,
+  "factorFetch": 16384,
+  "damping": 0.0125,
+  "radius": 0.15,
+  "absoluteGap": 2e-05,
+  "constraintTol": 5e-06,
+  "exposure": [
+    0.7,
+    0.3
+  ],
+  "protected": [
+    [
+      "common",
+      0,
+      -0.01,
+      0.005
+    ],
+    [
+      "transpose",
+      1,
+      -0.007,
+      0.008
+    ],
+    [
+      "contradiction",
+      0,
+      0.011,
+      0.013
+    ]
+  ],
+  "inactive": [
+    [
+      0,
+      1
+    ],
+    [
+      255,
+      191
+    ]
+  ],
+  "diagonal": [
+    [
+      0.125,
+      0
+    ],
+    [
+      0.0625,
+      0
+    ]
+  ],
+  "events": [
+    [
+      "factor",
+      "W30",
+      [
+        1,
+        2
+      ]
+    ],
+    [
+      "propose",
+      "W30",
+      [
+        "common",
+        "transpose"
+      ]
+    ],
+    [
+      "put",
+      "factor",
+      2,
+      "suppress"
+    ],
+    [
+      "propose",
+      "W30",
+      [
+        "common",
+        "contradiction"
+      ]
+    ],
+    [
+      "weight",
+      "W31"
+    ],
+    [
+      "apply",
+      "W30"
+    ]
+  ],
+  "readGroups": [
+    [
+      "direct",
+      "g",
+      0
+    ],
+    [
+      "direct",
+      "a",
+      1
+    ],
+    [
+      "transpose",
+      "g",
+      3
+    ],
+    [
+      "transpose",
+      "a",
+      4
+    ]
+  ]
+}
